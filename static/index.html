@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+</head>
+
+<body>
+    <div class="main" id="main">
+
+    </div>
+    <script>
+
+        const options = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+
+        fetch("/cwiczenia", options)
+            .then(response => response.json()) // konwersja na obiekt json, jeśli konieczne
+            .then(data => {
+
+                for (let i = 0; i < data.dirnames.length; i++) {
+                    let div = document.createElement("div")
+
+                    let h1 = document.createElement("h1")
+                    h1.innerText = data.dirnames[i]
+
+                    div.append(h1)
+
+                    for (let j = 0; j < data[data.dirnames[i]].length; j++) {
+                        let a = document.createElement("a")
+                        a.href = `cwiczenia/${data.dirnames[i]}/${data[data.dirnames[i]][j]}`
+                        a.text = data[data.dirnames[i]][j]
+                        a.style.marginLeft = '10px'
+                        div.append(a)
+                    }
+                    document.getElementById("main").append(div)
+                }
+
+
+
+            })
+            .catch(error => console.log(error));
+    </script>
+</body>
+
+</html>

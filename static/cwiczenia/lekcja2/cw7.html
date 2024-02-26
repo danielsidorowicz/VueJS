@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 1</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    cars: [
+                        { id: 1, model: "Volkswagen Arteon", typ: "Sedan", rok: "2020", img_src: "../../gfx/arteon.jpg" },
+                        { id: 2, model: "Willys MB", typ: "Offroad", rok: "1940", img_src: "../../gfx/willys.jpg" },
+                        { id: 3, model: "Dodge Charger", typ: "Muscle", rok: "1969", img_src: "../../gfx/charger.jpg" },
+                        { id: 4, model: "Nissan Skyline R34", typ: "Sports", rok: "2001", img_src: "../../gfx/skyline.jpeg" }
+                    ]
+                }
+            },
+            methods: {
+                getLink() {
+                    return this.link
+                },
+                getImage() {
+                    return this.image
+                },
+
+            }
+        }).mount("#app")
+
+    </script>
+</body>
+
+</html>
