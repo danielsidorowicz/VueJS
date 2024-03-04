@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 1</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <style>
+        .show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid gray;
+            color: gray
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="app">
+        <h1>Pokaż/Ukryj element</h1>
+        <button v-on:click="showElement">{{text}}</button>
+        <h3 class="show" v-show="show">element</h3>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    text: "ukryj",
+                    show: true
+                }
+            },
+            methods: {
+                showElement() {
+                    this.show = !this.show
+                }
+            }
+        }).mount("#app")
+
+    </script>
+</body>
+
+</html>

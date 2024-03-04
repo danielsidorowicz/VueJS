@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 1</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <style>
+        .app {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: fit-content;
+        }
+
+
+        .app div {
+            background-color: lightgray;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="app">
+        <div class="onclick" id="onclick">
+            <h1>Test onClick</h1>
+            <div @click="onClick" style="background-color: black; color: white; text-align: center;">CLICK ME!</div>
+        </div>
+        <div class="onchange" id="onchange">
+            <h1>Test onChange</h1>
+            <select @change="onChange">
+                <option>[wybierz]</option>
+                <option>option 1</option>
+                <option>option 2</option>
+            </select>
+            <h3 v-text="selectValue"></h3>
+        </div>
+        <div class="onchange2" id="onchange2">
+            <h1>Test onChange z inputem</h1>
+            <input type="range" @input="onInput" min="0" max="100" value="0">
+            <h3 v-text="inputValue"></h3>
+        </div>
+        <div class="onclick2" id="onclick2">
+            <h1>Test onClick z checkboxem</h1>
+            <input type="checkbox" @click="onCheckbox">
+            <h3 v-text="checkboxValue"></h3>
+        </div>
+        <div class="onclickButtons" id="onclickButtons">
+            <div class="onclickButton1" id="onclickButton1">
+                <h1>Test onClick z buttonami 1</h1>
+                <button @click="onButton1">Powiększa wartość licznika</button>
+                <h3 v-text="buttonClick1"></h3>
+            </div>
+            <div class="onclickButton2" id="onclickButton2">
+                <h1>Test onClick z buttonami 2</h1>
+                <button @click="onButton2">Liczby 2 do potęgi wartości powyżej</button>
+                <h3 v-text="buttonClick2"></h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    selectValue: "[ wybierz ]",
+                    inputValue: 0,
+                    checkboxValue: false,
+                    buttonClick1: 0,
+                    buttonClick2: 1,
+                }
+            },
+            methods: {
+                onClick() {
+                    return alert("wcisniety")
+                },
+
+                onChange(e) {
+                    this.selectValue = e.target.value
+                    return alert(e.target.value)
+                },
+
+                onInput(e) {
+                    this.inputValue = e.target.value
+                },
+
+                onCheckbox(e) {
+                    this.checkboxValue = e.target.checked
+                    return alert(e.target.checked)
+                },
+
+                onButton1() {
+                    this.buttonClick1++
+                },
+
+                onButton2() {
+                    this.buttonClick2 = 2 ** this.buttonClick1
+                }
+            }
+        }).mount("#app")
+
+    </script>
+</body>
+
+</html>

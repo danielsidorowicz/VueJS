@@ -7,11 +7,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lekcja 1</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .linear {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        .displayDiv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+        }
+
+        .ciemna {
+            background-color: gray;
+        }
+
+        .jasna {
+            background-color: lightcyan;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-
+        <div class="linear">
+            <div v-for="(val,i) in cars" class="displayDiv" v-bind:class="checkIfOld(i)">
+                <h1>{{getCar(i).model}}</h1>
+                <h1>{{getCar(i).typ}}</h1>
+                <h1>{{getCar(i).rok}}</h1>
+                <img v-bind:src="getImage(i)" width='200px' height='100px' />
+            </div>
+        </div>
     </div>
 
     <script>
@@ -19,20 +49,35 @@
             data() {
                 return {
                     cars: [
-                        { id: 1, model: "Volkswagen Arteon", typ: "Sedan", rok: "2020", img_src: "../../gfx/arteon.jpg" },
-                        { id: 2, model: "Willys MB", typ: "Offroad", rok: "1940", img_src: "../../gfx/willys.jpg" },
-                        { id: 3, model: "Dodge Charger", typ: "Muscle", rok: "1969", img_src: "../../gfx/charger.jpg" },
-                        { id: 4, model: "Nissan Skyline R34", typ: "Sports", rok: "2001", img_src: "../../gfx/skyline.jpeg" }
+                        { id: 1, model: "Volkswagen Arteon", typ: "Sedan", rok: "2020" },
+                        { id: 2, model: "Willys MB", typ: "Offroad", rok: "1940" },
+                        { id: 3, model: "Dodge Charger", typ: "Muscle", rok: "1969" },
+                        { id: 4, model: "Nissan Skyline R34", typ: "Sports", rok: "2001" }
+                    ],
+                    cars_images: [
+                        { id: 1, img_src: "../../gfx/arteon.jpg" },
+                        { id: 2, img_src: "../../gfx/willys.jpg" },
+                        { id: 3, img_src: "../../gfx/charger.jpg" },
+                        { id: 4, img_src: "../../gfx/skyline.jpeg" }
                     ]
                 }
             },
             methods: {
-                getLink() {
-                    return this.link
+                getCar(id) {
+                    return { model: this.cars[id].model, typ: this.cars[id].typ, rok: this.cars[id].rok }
                 },
-                getImage() {
-                    return this.image
+
+                getImage(id) {
+                    return this.cars_images[id].img_src
                 },
+
+                checkIfOld(id) {
+                    if (this.cars[id].rok > 2000) {
+                        return "ciemna"
+                    } else {
+                        return "jasna"
+                    }
+                }
 
             }
         }).mount("#app")
