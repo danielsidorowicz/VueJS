@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 4</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .app {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <form action="/aaa" method="POST" @reset="reset" @submit="submit">
+            <input type="text" name="value" id="inputext">
+            <button type="reset">Reset</button>
+            <button type="submit">Wyślij</button>
+        </form>
+        <input type="checkbox" name="block" id="block" @click="boxChecked">Blokada zdarzeń formularza
+        <h1 id="disp">{{ h1Message }}</h1>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+
+            data() {
+                return {
+                    boxSel: false,
+                    h1Message: "",
+                }
+            },
+            methods: {
+                submit(e) {
+                    if (this.boxSel) {
+                        e.preventDefault();
+                        this.h1Message = "Formularz nie wysłany"
+                    } else {
+                        this.h1Message = "Formularz wysłany"
+                    }
+                },
+                reset(e) {
+                    if (this.boxSel) {
+                        e.preventDefault();
+                        this.h1Message = "Formularz nie zresetowany"
+                    } else {
+                        this.h1Message = "Formularz zresetowany"
+                    }
+                },
+                boxChecked(e) {
+                    this.boxSel = e.target.checked
+                }
+            }
+        }).mount("#app")
+    </script>
+</body>
+
+</html>
