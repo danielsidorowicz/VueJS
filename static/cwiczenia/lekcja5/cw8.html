@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 5</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .all {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 10px;
+            background-color: lightgray;
+            width: fit-content;
+        }
+
+        .children {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        ul {
+            padding: 20px;
+            width: fit-content;
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="all">
+            <h1>{{ title }}</h1>
+            <div class="children">
+                <ul>
+                    <child-div-component v-for="item in items" v-bind:wartosc="item"></child-div-component>
+                </ul>
+            </div>
+        </div>
+        <div class="addItem">
+            <h1>Dodaj item do listy</h1>
+            <input type="text" v-on:keyup.enter="addItemToList">
+        </div>
+        <div class="changeTitle">
+            <h1>Zmień tytuł aplikacji</h1>
+            <input type="text" v-on:keyup.enter="changeAppTitle">
+        </div>
+    </div>
+
+    <script>
+        const appData = {
+            title: "app title",
+            items: [
+                { text: "element 1" },
+                { text: "element 2" },
+            ],
+        }
+
+        const ChildDivComponent = {
+            data() {
+                return appData; // komponent pobiera dane globalne
+            },
+
+            template:
+                `
+                <li>
+                {{ wartosc.text }}    
+                </li>
+                `,
+
+            methods: {
+            },
+
+            props: ["wartosc"]
+        };
+
+        const app = Vue.createApp({
+            data() {
+                return appData
+            },
+
+            methods: {
+                addItemToList(e) {
+                    this.items.push({ text: e.target.value })
+                    e.target.value = ""
+                },
+                changeAppTitle(e) {
+                    this.title = e.target.value
+                    e.target.value = ""
+                }
+            },
+            components: {
+                "child-div-component": ChildDivComponent,
+            }
+        }).mount("#app")
+
+    </script>
+</body>
+
+</html>

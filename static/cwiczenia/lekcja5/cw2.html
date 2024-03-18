@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 5</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .all {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        div>div>div {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="all">
+            <div-component></div-component>
+            <div-component></div-component>
+            <div-component></div-component>
+        </div>
+    </div>
+
+    <script>
+        const DivComponent = {
+
+            template: `
+                <div>
+                    <h2>Moja wizytówka:</h2>           
+                    <p>Imie: {{ imie }}</p>
+                    <p>Nazwisko: {{ nazwisko }}</p>
+                    <p>Wiek: {{ wiek }}</p>
+                    <p>Zawód: {{ zawod }}</p>
+                </div>
+                `,
+
+            data() {
+                return {
+                    imie: "Jan",
+                    nazwisko: "Kowalski",
+                    wiek: "30",
+                    zawod: "Informatyk"
+                }
+            },
+
+            methods: {
+
+            },
+        };
+
+        const app = Vue.createApp({
+            data() { },
+            methods: {},
+            components: {
+                "div-component": DivComponent
+            }
+        }).mount("#app")
+
+    </script>
+</body>
+
+</html>

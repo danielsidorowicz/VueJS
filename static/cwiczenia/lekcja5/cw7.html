@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 5</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .all {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 10px;
+            background-color: lightgray;
+            width: fit-content;
+        }
+
+        .children {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        div>div>div>div {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="all">
+            <h1>Wartość obecna: {{ parentValue }}</h1>
+            <div class="children">
+                <child-div-component1 :funkcja="updateDataInParent"></child-div-component1>
+                <child-div-component2 :funkcja="updateDataInParent"></child-div-component2>
+                <child-div-component3 :funkcja="updateDataInParent"></child-div-component3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ChildDivComponent1 = {
+            template: `
+                <div>
+                    <h1>111</h1>
+                    <button @click="addItem(111)">send to parent</button>
+                </div>
+                `,
+
+            data() {
+
+            },
+
+            methods: {
+                addItem(val) {
+                    this.funkcja(val)
+                }
+            },
+
+            props: ["funkcja"]
+        };
+        const ChildDivComponent2 = {
+            template: `
+                <div>
+                    <h1>222</h1>
+                    <button @click="addItem(222)">send to parent</button>
+                </div>
+                `,
+
+            data() {
+
+            },
+
+            methods: {
+                addItem(val) {
+                    this.funkcja(val)
+                }
+            },
+
+            props: ["funkcja"]
+        };
+        const ChildDivComponent3 = {
+            template: `
+                <div>
+                    <h1>333</h1>
+                    <button @click="addItem(333)">send to parent</button>
+                </div>
+                `,
+
+            data() {
+
+            },
+
+            methods: {
+                addItem(val) {
+                    this.funkcja(val)
+                }
+            },
+
+            props: ["funkcja"]
+        };
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    parentValue: 0,
+                }
+            },
+            methods: {
+                updateDataInParent(val) {
+                    this.parentValue += val
+                }
+            },
+            components: {
+                "child-div-component1": ChildDivComponent1,
+                "child-div-component2": ChildDivComponent2,
+                "child-div-component3": ChildDivComponent3,
+            }
+        }).mount("#app")
+
+    </script>
+</body>
+
+</html>

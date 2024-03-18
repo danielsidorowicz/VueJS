@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 5</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        h3 {
+            color: white;
+        }
+
+        .blue {
+            background-color: lightblue;
+        }
+
+        .green {
+            background-color: lightgreen;
+        }
+
+        .red {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <blue-component></blue-component>
+        <green-component></green-component>
+        <red-component></red-component>
+        <red-component></red-component>
+        <green-component></green-component>
+        <blue-component></blue-component>
+    </div>
+
+    <script>
+        const BlueComponent = {
+            template: "<h3 class='blue'>Blue Component</h3>"
+        }
+
+        const GreenComponent = {
+            template: "<h3 class='green'>Green Component</h3>"
+        }
+
+        const RedComponent = {
+            template: "<h3 class='red'>Red Component</h3>"
+        }
+
+        const app = Vue.createApp({
+            data() { },
+            methods: {},
+            components: {
+                "blue-component": BlueComponent,
+                "green-component": GreenComponent,
+                "red-component": RedComponent,
+            }
+        }).mount("#app")
+
+    </script>
+</body>
+
+</html>

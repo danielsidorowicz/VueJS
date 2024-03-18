@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 5</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .all {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        div>div>div {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="all">
+            <div-component imie="Jan" nazwisko="Kowalski" wiek="30" zawod="Informatyk"></div-component>
+            <div-component imie="Agata" nazwisko="Meble" wiek="50" zawod="Bizneswoman"></div-component>
+            <div-component imie="Stanisław" nazwisko="Wirnik" wiek="24" zawod="Student"></div-component>
+        </div>
+    </div>
+
+    <script>
+        const DivComponent = {
+            template: `
+                <div>
+                    <h2>Moja wizytówka:</h2>           
+                    <p>Imie: {{ this.imie }}</p>
+                    <p>Nazwisko: {{ this.nazwisko }}</p>
+                    <p>Wiek: {{ this.wiek }}</p>
+                    <p>Zawód: {{ this.zawod }}</p>
+                    <pre>{{JSON.stringify(this.$props, null,5)}}</pre>
+                </div>
+                `,
+
+            data() { },
+
+            methods: {},
+            props: ["imie", "nazwisko", "wiek", "zawod"]
+        };
+
+        const app = Vue.createApp({
+            data() { },
+            methods: {},
+            components: {
+                "div-component": DivComponent
+            }
+        }).mount("#app")
+
+    </script>
+</body>
+
+</html>
